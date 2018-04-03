@@ -1,0 +1,66 @@
+package com.jmzx.maven.plugin.utils;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.junit.Test;
+
+/**  
+* @Package 
+*	 com.iqarr.maven.plugin.utils
+* @ClassName: 
+*	 FileUtilsTest  
+* @since 
+*	  V1.0
+* @author 
+*		zhangyong   
+* @version 
+*		V1.0      
+*/
+public class FileUtilsTest {
+    
+    
+    /**
+     * Test method for {@link FileUtils#readToString(File, String)}.
+     * @throws IOException 
+     *  
+     */
+    @Test
+    public void testReadToString() throws IOException{
+        String[] readToString = FileUtils.readToString(new File(this.getClass().getClassLoader().getResource("test.html").getPath()) , "utf-8");
+        
+        assertNotNull(readToString);
+       
+        
+    }
+    
+    /**
+     * Test method for {@link FileUtils#testFileLinefeed(java.io.File, java.lang.String)}.
+     * @throws IOException 
+     */
+    @Test
+    public void testTestFileLinefeed() throws IOException {
+        char[] testFileLinefeed = FileUtils.testFileLinefeed(new File(this.getClass().getClassLoader().getResource("mac.txt").getPath()) , "utf-8");
+        char [] test=new char[1];
+        test[0]='\n';
+        assertArrayEquals(test , testFileLinefeed);
+    }
+    
+    /**
+     * Test method for {@link FileUtils#readToString(File, String)}.
+     * @throws Exception 
+     *  
+     */
+    @Test
+    public void testClearBlankLines() throws Exception{
+        String readToStr = FileUtils.readToStr(new File(this.getClass().getClassLoader().getResource("test.html").getPath()) , "utf-8");
+        StringBuffer sb=new StringBuffer(readToStr);
+        FileUtils.clearBlankLines(sb,  "utf-8");
+        
+        //System.out.println(sb.toString());
+    }
+    
+}
